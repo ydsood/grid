@@ -1,0 +1,25 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.aboutMe {
+  height: 100vh;
+  padding: 35vh;
+  text-align: center;
+}
+
+input,
+textarea {
+  border: 0px;
+  border-bottom: 1px solid grey;
+  outline: none;
+  text-align: center;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+textarea:focus,
+input:focus {
+  border-bottom: 3px solid green;
+}

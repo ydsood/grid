@@ -1,0 +1,4 @@
+/* {
+  category: 'select',
+  hobby: 'string',
+}; */
