@@ -7,7 +7,6 @@ export default class TableRow extends Component<Object> {
     const renderData = input ? input.value : data;
     return this.props.columnModel.get().map((column, index) => {
       const cellNamePrefix = input ? input.name : index;
-      console.log(column.formatter);
       return (
         <Table.Cell key={`${cellNamePrefix}.${column.dataIndex}`}>
           {column.formatter
