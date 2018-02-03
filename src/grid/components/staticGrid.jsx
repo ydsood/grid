@@ -1,45 +1,54 @@
 import React, { Component } from 'react';
-import { List, Card, Segment, Header } from 'semantic-ui-react';
-import { markdown } from 'markdown';
-import buildList from './listHOC';
+import { Table, Segment, Header } from 'semantic-ui-react';
+import buildGrid from './gridHOC';
+import TableRow from './tableRow';
 
-type StaticListProps = {
+type StaticGridProps = {
   data: Array<string>,
   title: string,
+  getData: Function,
+  columnModel: Function
 };
 
-class StaticList extends Component<StaticListProps> {
-  buildListItem() {
-    const { data } = this.props;
-    let cardNumber = 0;
-    return data.map((item) => {
-      cardNumber += 1;
-      return (
-        <List.Item key={cardNumber}>
-          <Card>
-            <Card.Content>
-              <Card.Header>{`Card #${cardNumber}`}</Card.Header>
-              <Card.Description>
-                <div dangerouslySetInnerHTML={{ __html: markdown.toHTML(item) }} />
-              </Card.Description>
-            </Card.Content>
-          </Card>
-        </List.Item>
-      );
-    });
+class StaticGrid extends Component<StaticGridProps> {
+  buildTableBody() {
+    const { data, columnModel } = this.props;
+    return data.map((item, index) => (
+      <TableRow key={`${index}`} data={item} columnModel={columnModel} />
+    ));
+  }
+
+  buildTableHeaders() {
+    return (
+      <Table.Header>
+        <Table.Row>
+          {this.props.columnModel
+            .get()
+            .map(item => (
+              <Table.HeaderCell key={item.dataIndex}>
+                {item.name}
+              </Table.HeaderCell>
+            ))}
+        </Table.Row>
+      </Table.Header>
+    );
   }
 
   render() {
-    return (
+    const renderComponent = (
       <Segment>
-        <Header as="h4">{this.props.title}</Header>
+        <Header as="h4">{`${this.props.title}`}</Header>
         <Segment basic>
-          <List>{this.buildListItem()}</List>
+          <Table>
+            {this.buildTableHeaders()}
+            <Table.Body>{this.buildTableBody()}</Table.Body>
+          </Table>
         </Segment>
       </Segment>
     );
+    return renderComponent;
   }
 }
 
-const foo = buildList(StaticList);
+const foo = buildGrid(StaticGrid);
 export default foo;

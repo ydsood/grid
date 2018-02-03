@@ -1,6 +1,6 @@
-import React from "react";
-import StaticGrid from "./components/staticGrid";
-import EditableGrid from "./components/editableGrid";
+import React from 'react';
+import StaticGrid from './components/staticGrid';
+import EditableGrid from './components/editableGrid';
 
 type GridProps = {
   data: Array<String> | void,
@@ -20,8 +20,16 @@ export default function List(props: GridProps) {
         formProps={formProps}
         getData={getData}
         title={title}
+        columnModel={columnModel}
       />
     );
   }
-  return <StaticGrid data={data} getData={getData} title={title} />;
+  return (
+    <StaticGrid
+      data={data}
+      getData={getData}
+      title={title}
+      columnModel={columnModel}
+    />
+  );
 }

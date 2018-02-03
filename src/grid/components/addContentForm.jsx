@@ -1,21 +1,26 @@
 import React, { Component } from 'react';
-import { Button, Form, Segment } from 'semantic-ui-react';
+import { Button, Form } from 'semantic-ui-react';
 
 type Props = {
   submitHandler: Function,
-  fields: Array<{
+  cancelHandler: Function,
+  columnModel: Array<{
     name: string,
-    defaultValue: *,
-    placeholder: string | void,
-    required: boolean,
-  }>,
+    dataIndex: string,
+    formatter: Function,
+    required: boolean
+  }>
 };
 
 class AddContent extends Component<Props> {
   constructor(props) {
     super(props);
     const fields =
-      props.fields && props.fields.map(item => ({ name: item.name, value: item.defaultValue }));
+      props.columnModel &&
+      props.columnModel.get().map(item => ({
+        name: item.dataIndex,
+        value: null
+      }));
     this.state = fields.reduce((acc, curr) => {
       acc[curr.name] = curr.value;
       return acc;
@@ -28,47 +33,41 @@ class AddContent extends Component<Props> {
     const newFieldValue = {};
     newFieldValue[event.target.name] = event.target.value;
     this.setState({ ...newFieldValue });
-    console.log(this.state);
-  }
-
-  validateFields() {
-    this.props.fields.forEach();
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    console.log(this.state);
     this.props.submitHandler(this.state);
   }
 
-  renderFields() {
-    return this.props.fields.map((field) => {
-      const value = this.state[field.name] && this.state[field.name].value;
-      return (
+  renderFields = () =>
+    this.props.columnModel
+      .get()
+      .map(column => (
         <Form.Input
-          key={field.name}
-          name={field.name}
-          value={value || undefined}
+          key={column.dataIndex}
+          name={column.dataIndex}
           onChange={this.handleChange}
-          placeholder={field.placeholder}
-          required={field.required}
+          placeholder={column.name}
+          required={column.required}
         />
-      );
-    });
-  }
+      ));
 
   render() {
     return (
-      <Segment>
-        {this.renderFields()}
-        <Button circular icon="check" onClick={this.handleSubmit} />
-      </Segment>
+      <div className="ui unstackable form">
+        <Form.Group widths="equal">
+          {this.renderFields()}
+          <Button circular icon="check" onClick={this.handleSubmit} />
+          <Button circular icon="close" onClick={this.props.cancelHandler} />
+        </Form.Group>
+      </div>
     );
   }
 }
 
 AddContent.defaultProps = {
-  fields: [],
+  fields: []
 };
 
 export default AddContent;

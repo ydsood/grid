@@ -7,15 +7,16 @@ type Props = {
     name: string,
     defaultValue: *,
     placeholder: string | void,
-    required: boolean,
-  }>,
+    required: boolean
+  }>
 };
 
 class AddContent extends Component<Props> {
   constructor(props) {
     super(props);
     const fields =
-      props.fields && props.fields.map(item => ({ name: item.name, value: item.defaultValue }));
+      props.fields &&
+      props.fields.map(item => ({ name: item.name, value: item.defaultValue }));
     this.state = fields.reduce((acc, curr) => {
       acc[curr.name] = curr.value;
       return acc;
@@ -28,7 +29,6 @@ class AddContent extends Component<Props> {
     const newFieldValue = {};
     newFieldValue[event.target.name] = event.target.value;
     this.setState({ ...newFieldValue });
-    console.log(this.state);
   }
 
   validateFields() {
@@ -37,13 +37,12 @@ class AddContent extends Component<Props> {
 
   handleSubmit(event) {
     event.preventDefault();
-    console.log(this.state);
     this.props.submitHandler(this.state);
   }
 
   renderFields() {
-    return this.props.fields.map((field) => {
-      const value = this.state[field.name] && this.state[field.name].value;
+    return this.props.fields.map(field => {
+      const value = this.state[field.name] && this.state[field.name];
       return (
         <Form.Input
           key={field.name}
@@ -68,7 +67,7 @@ class AddContent extends Component<Props> {
 }
 
 AddContent.defaultProps = {
-  fields: [],
+  fields: []
 };
 
 export default AddContent;

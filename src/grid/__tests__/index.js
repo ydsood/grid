@@ -30,7 +30,7 @@ const columns = [
         return true;
       }
       return false;
-    },
+    }
   },
   {
     dataIndex: 'govtID',
@@ -40,20 +40,21 @@ const columns = [
     sortComparator: 'default', // can be skipped and default should be used
     // renderer should only be called if data is valid else render value as is with error
     // renderer should only be called for non empty, non-null values
-    validator: (value) => {
+    validator: value => {
       if (value.length === 9) {
         return true;
       }
       return false;
     },
     // Can custom render cell values (might be key for redux form)
-    renderer: value => `${value.substring(0, 3)}-${value.substring(3, 2)}-${value.substring(5)}`,
+    renderer: value =>
+      `${value.substring(0, 3)}-${value.substring(3, 2)}-${value.substring(5)}`
   },
   {
     dataIndex: 'homePhone',
     name: 'Home Phone',
     order: 3,
-    type: 'phone', // should not support custom types in this implementation and assume text
+    type: 'phone' // should not support custom types in this implementation and assume text
     // skipping default comparator
     // skipping renderer, same value should be rendered
   },
@@ -62,9 +63,13 @@ const columns = [
     name: 'Work Phone',
     // missing order should be pushed to end
     type: 'text',
-    renderer: value =>
-      <Icon name="phone" />`(${value.substring(0, 3)})-${value.substring(3, 3)}-${value.substring(6)}`,
-  },
+    renderer: value => (
+      <div>
+        <Icon name="phone" />
+        {`(${value.substring(0, 3)})-${value.substring(3, 3)}-${value.substring(6)}`}
+      </div>
+    )
+  }
 ];
 /** Requirements for data rendering
  * Missing attribute on object should render blank
@@ -74,21 +79,21 @@ const data = [
   {
     name: 'John Doe',
     govtID: '123456789',
-    homePhone: '3431231234',
+    homePhone: '3431231234'
   },
   // incorrect data in govtID should be rendered with error
   {
     name: 'John Smith',
     govtID: '12345678',
     homePhone: '3431231234',
-    workPhone: '',
+    workPhone: ''
   },
   {
     name: 'Darius Carreira',
     govtID: '123456678',
     homePhone: '8674561298',
-    workPhone: '8674561245',
-  },
+    workPhone: '8674561245'
+  }
 ];
 
 describe('Static Grid Tests', () => {

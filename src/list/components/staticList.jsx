@@ -1,29 +1,22 @@
 import React, { Component } from 'react';
-import { List, Card, Segment, Header } from 'semantic-ui-react';
-import { markdown } from 'markdown';
+import { List, Segment, Header } from 'semantic-ui-react';
 import buildList from './listHOC';
+import ListItem from './listItem';
 
 type StaticListProps = {
   data: Array<string>,
-  title: string,
+  title: string
 };
 
 class StaticList extends Component<StaticListProps> {
   buildListItem() {
     const { data } = this.props;
     let cardNumber = 0;
-    return data.map((item) => {
+    return data.map(item => {
       cardNumber += 1;
       return (
         <List.Item key={cardNumber}>
-          <Card>
-            <Card.Content>
-              <Card.Header>{`Card #${cardNumber}`}</Card.Header>
-              <Card.Description>
-                <div dangerouslySetInnerHTML={{ __html: markdown.toHTML(item) }} />
-              </Card.Description>
-            </Card.Content>
-          </Card>
+          <ListItem value={item} />
         </List.Item>
       );
     });

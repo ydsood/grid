@@ -1,42 +1,26 @@
-import React, { Component, createElement } from 'react';
-import { List, Card, Segment, Header, Sidebar, Button } from 'semantic-ui-react';
+import React, { Component } from 'react';
+import { Table, Segment, Header, Sidebar, Button } from 'semantic-ui-react';
 import { Field } from 'redux-form';
-import { markdown } from 'markdown';
 import AddContent from './addContentForm';
-import buildList from './listHOC';
+import buildGrid from './gridHOC';
+import TableRow from './tableRow';
 
-type FormListProps = {
+type EditableGridProps = {
   data: Array<string>,
   formProps: Object,
   title: string,
+  columnModel: Array<Object>
 };
 
-type CardFieldProps = {
-  input: Object,
-  cardNumber: number,
-};
-
-const renderCardField = ({ input, check }: CardFieldProps) => (
-  <List.Item>
-    <Card>
-      <Card.Content>
-        <Card.Header>Hobby</Card.Header>
-        <Card.Description>
-          <div dangerouslySetInnerHTML={{ __html: markdown.toHTML(check) }} />
-        </Card.Description>
-      </Card.Content>
-    </Card>
-  </List.Item>
-);
-
-class FormList extends Component<FormListProps> {
+class EditableGrid extends Component<EditableGridProps> {
   constructor(props) {
     super(props);
     this.state = {
-      addData: false,
+      addData: false
     };
     this.addData = this.addData.bind(this);
     this.submitHandler = this.submitHandler.bind(this);
+    this.cancelHandler = this.cancelHandler.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -56,33 +40,51 @@ class FormList extends Component<FormListProps> {
 
   submitHandler(values) {
     console.log(values);
-    this.props.formProps.fields.push(values.newData);
+    this.props.formProps.fields.push(values);
+    this.addDataComplete();
+  }
+
+  cancelHandler() {
     this.addDataComplete();
   }
 
   buildFieldItems() {
-    const { data, formProps: { fields } } = this.props;
-    console.log(data);
-    let cardNumber = 0;
-    if (!fields || fields.length === 0) {
+    const { formProps: { fields } } = this.props;
+    let rowNumber = 0;
+    /* if (!fields || fields.length === 0) {
       return <Segment basic />;
-    }
-    return fields.map((item, index) => {
-      cardNumber += 1;
+    } */
+    return fields.map(name => {
+      rowNumber += 1;
       return (
         <Field
-          key={cardNumber}
-          component={renderCardField}
-          name={`${fields.name}.newItem`}
-          check={fields.get(index)}
+          key={rowNumber}
+          component={TableRow}
+          name={name}
+          columnModel={this.props.columnModel}
         />
       );
     });
   }
 
+  buildTableHeaders() {
+    return (
+      <Table.Header>
+        <Table.Row>
+          {this.props.columnModel
+            .get()
+            .map(item => (
+              <Table.HeaderCell key={item.dataIndex}>
+                {item.name}
+              </Table.HeaderCell>
+            ))}
+        </Table.Row>
+      </Table.Header>
+    );
+  }
+
   render() {
     const { addData } = this.state;
-    const fields = [{ name: 'newData', placeHolder: 'add content...' }];
     const renderComponent = (
       <Segment>
         <Header as="h4">
@@ -99,11 +101,18 @@ class FormList extends Component<FormListProps> {
             width="thin"
             vertical
           >
-            <AddContent submitHandler={this.submitHandler} fields={fields} />
+            <AddContent
+              submitHandler={this.submitHandler}
+              cancelHandler={this.cancelHandler}
+              columnModel={this.props.columnModel}
+            />
           </Sidebar>
           <Sidebar.Pusher>
             <Segment basic>
-              <List>{this.buildFieldItems()}</List>
+              <Table>
+                {this.buildTableHeaders()}
+                <Table.Body>{this.buildFieldItems()}</Table.Body>
+              </Table>
             </Segment>
           </Sidebar.Pusher>
         </Sidebar.Pushable>
@@ -113,4 +122,4 @@ class FormList extends Component<FormListProps> {
   }
 }
 
-export default buildList(FormList);
+export default buildGrid(EditableGrid);
