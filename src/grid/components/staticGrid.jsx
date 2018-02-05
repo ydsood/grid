@@ -6,8 +6,8 @@ import TableRow from './tableRow';
 type StaticGridProps = {
   data: Array<string>,
   title: string,
-  getData: Function,
-  columnModel: Function
+  columnModel: Function,
+  buildTableHeaders: Function
 };
 
 class StaticGrid extends Component<StaticGridProps> {
@@ -18,29 +18,13 @@ class StaticGrid extends Component<StaticGridProps> {
     ));
   }
 
-  buildTableHeaders() {
-    return (
-      <Table.Header>
-        <Table.Row>
-          {this.props.columnModel
-            .get()
-            .map(item => (
-              <Table.HeaderCell key={item.dataIndex}>
-                {item.name}
-              </Table.HeaderCell>
-            ))}
-        </Table.Row>
-      </Table.Header>
-    );
-  }
-
   render() {
     const renderComponent = (
       <Segment>
         <Header as="h4">{`${this.props.title}`}</Header>
         <Segment basic>
           <Table>
-            {this.buildTableHeaders()}
+            {this.props.buildTableHeaders()}
             <Table.Body>{this.buildTableBody()}</Table.Body>
           </Table>
         </Segment>

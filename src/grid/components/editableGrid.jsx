@@ -9,7 +9,8 @@ type EditableGridProps = {
   data: Array<string>,
   formProps: Object,
   title: string,
-  columnModel: Array<Object>
+  columnModel: Array<Object>,
+  buildTableHeaders: Function
 };
 
 class EditableGrid extends Component<EditableGridProps> {
@@ -67,22 +68,6 @@ class EditableGrid extends Component<EditableGridProps> {
     });
   }
 
-  buildTableHeaders() {
-    return (
-      <Table.Header>
-        <Table.Row>
-          {this.props.columnModel
-            .get()
-            .map(item => (
-              <Table.HeaderCell key={item.dataIndex}>
-                {item.name}
-              </Table.HeaderCell>
-            ))}
-        </Table.Row>
-      </Table.Header>
-    );
-  }
-
   render() {
     const { addData } = this.state;
     const renderComponent = (
@@ -110,7 +95,7 @@ class EditableGrid extends Component<EditableGridProps> {
           <Sidebar.Pusher>
             <Segment basic>
               <Table>
-                {this.buildTableHeaders()}
+                {this.props.buildTableHeaders()}
                 <Table.Body>{this.buildFieldItems()}</Table.Body>
               </Table>
             </Segment>
