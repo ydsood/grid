@@ -27,6 +27,7 @@ class AddContent extends Component<Props> {
     }, {});
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleCancel = this.handleCancel.bind(this);
   }
 
   handleChange(event) {
@@ -38,6 +39,11 @@ class AddContent extends Component<Props> {
   handleSubmit(event) {
     event.preventDefault();
     this.props.submitHandler(this.state);
+  }
+
+  handleCancel(event) {
+    event.preventDefault();
+    this.props.cancelHandler();
   }
 
   renderFields = () =>
@@ -59,7 +65,7 @@ class AddContent extends Component<Props> {
         <Form.Group widths="equal">
           {this.renderFields()}
           <Button circular icon="check" onClick={this.handleSubmit} />
-          <Button circular icon="close" onClick={this.props.cancelHandler} />
+          <Button circular icon="close" onClick={this.handleCancel} />
         </Form.Group>
       </div>
     );

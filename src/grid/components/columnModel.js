@@ -1,8 +1,8 @@
-const columnModelData: Array<Object> = [];
+const columnModelData = Symbol('Column Model');
 
 export default class ColumnModel {
   constructor(colModelData: Array<Object>) {
-    this.columnModelData = colModelData.sort((a, b) => {
+    this[columnModelData] = colModelData.sort((a, b) => {
       if (!a.order) {
         return 1;
       }
@@ -17,6 +17,6 @@ export default class ColumnModel {
   }
 
   get() {
-    return this.columnModelData;
+    return this[columnModelData];
   }
 }
