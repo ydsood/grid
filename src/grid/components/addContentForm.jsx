@@ -46,8 +46,8 @@ class AddContent extends Component<Props> {
     this.props.cancelHandler();
   }
 
-  renderFields = () =>
-    this.props.columnModel
+  renderFields() {
+    return this.props.columnModel
       .get()
       .map(column => (
         <Form.Input
@@ -58,6 +58,7 @@ class AddContent extends Component<Props> {
           required={column.required}
         />
       ));
+  }
 
   render() {
     return (

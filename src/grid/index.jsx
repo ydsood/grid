@@ -11,7 +11,7 @@ type GridProps = {
   columnModel: Array<Object>
 };
 
-export default function List(props: GridProps) {
+function Grid(props: GridProps) {
   const { editable, data, getData, title, columnModel, ...formProps } = props;
   if (editable) {
     return (
@@ -33,3 +33,11 @@ export default function List(props: GridProps) {
     />
   );
 }
+
+Grid.defaultProps = {
+  getData: undefined,
+  editable: false,
+  formProps: undefined
+};
+
+export default Grid;

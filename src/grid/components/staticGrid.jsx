@@ -13,9 +13,11 @@ type StaticGridProps = {
 class StaticGrid extends Component<StaticGridProps> {
   buildTableBody() {
     const { data, columnModel } = this.props;
-    return data.map((item, index) => (
-      <TableRow key={`${index}`} data={item} columnModel={columnModel} />
-    ));
+    let rowNumber = 0;
+    return data.map(item => {
+      rowNumber += 1;
+      return <TableRow key={rowNumber} data={item} columnModel={columnModel} />;
+    });
   }
 
   render() {
