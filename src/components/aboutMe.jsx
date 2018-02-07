@@ -6,6 +6,7 @@ import InputField from './input';
 import List from '../list';
 import Grid from '../grid';
 import { getData, getGridData } from '../actions';
+import PhoneField from './fields/phoneField';
 
 const onSubmit = values => alert(JSON.stringify(values));
 type Props = {
@@ -41,14 +42,13 @@ function AboutMe(props: Props) {
     {
       dataIndex: 'role',
       name: 'Role',
-      type: 'string',
       order: 2,
       formatter: roleFormatter
     },
     {
       dataIndex: 'percentage',
       name: 'Role Percentage',
-      type: 'number'
+      editor: PhoneField
     }
   ];
   return (

@@ -1,10 +1,9 @@
 // @flow
 import React from 'react';
-import { configure, shallow, mount } from 'enzyme';
-import { Button } from 'semantic-ui-react';
+import { configure, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import ColumnModel from '../columnModel';
-import columns from '../__mocks__/columnDef';
+import columns from '../../__mocks__/columnDef';
 import AddContentForm from '../addContentForm';
 
 configure({ adapter: new Adapter() });

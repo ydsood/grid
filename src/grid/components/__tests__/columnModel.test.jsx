@@ -2,7 +2,7 @@
 import { configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
-import columns from '../__mocks__/columnDef';
+import columns from '../../__mocks__/columnDef';
 import ColumnModel from '../columnModel';
 
 configure({ adapter: new Adapter() });
