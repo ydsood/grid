@@ -7,7 +7,8 @@ type StaticGridProps = {
   data: Array<string>,
   title: string,
   columnModel: Function,
-  buildTableHeaders: Function
+  buildTableHeaders: Function,
+  name: string
 };
 
 class StaticGrid extends Component<StaticGridProps> {
@@ -16,7 +17,15 @@ class StaticGrid extends Component<StaticGridProps> {
     let rowNumber = 0;
     return data.map(item => {
       rowNumber += 1;
-      return <TableRow key={rowNumber} data={item} columnModel={columnModel} />;
+      const name = `${this.props.name}[${rowNumber}]`;
+      return (
+        <TableRow
+          key={name}
+          data={item}
+          columnModel={columnModel}
+          name={name}
+        />
+      );
     });
   }
 

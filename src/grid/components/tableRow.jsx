@@ -1,22 +1,38 @@
 import React, { Component } from 'react';
-import { Table } from 'semantic-ui-react';
+import { Table, Button } from 'semantic-ui-react';
+import TableCell from './tableCell';
 
 export default class TableRow extends Component<Object> {
-  buildRowColumns() {
-    const { input, data } = this.props;
+  buildRowCells() {
+    const { input, editable, removeData, index, data, name } = this.props;
     const renderData = input ? input.value : data;
-    return this.props.columnModel.get().map((column, index) => {
-      const cellNamePrefix = input ? input.name : index;
+    const cells = this.props.columnModel.get().map(column => {
+      console.log(name);
+      const cellNamePrefix = input ? input.name : name;
+      const { dataIndex } = column;
+      const value = renderData[dataIndex];
       return (
         <Table.Cell key={`${cellNamePrefix}.${column.dataIndex}`}>
-          {column.formatter
-            ? column.formatter(renderData[column.dataIndex])
-            : renderData[column.dataIndex]}
+          <TableCell
+            name={cellNamePrefix}
+            column={column}
+            value={value}
+            editable
+          />
         </Table.Cell>
       );
     });
+    if (editable) {
+      const removeRowCell = (
+        <Table.Cell>
+          <Button icon="remove" circular onClick={e => removeData(e, index)} />
+        </Table.Cell>
+      );
+      cells.unshift(removeRowCell);
+    }
+    return cells;
   }
   render() {
-    return <Table.Row>{this.buildRowColumns()}</Table.Row>;
+    return <Table.Row>{this.buildRowCells()}</Table.Row>;
   }
 }

@@ -21,6 +21,7 @@ function Grid(props: GridProps) {
         getData={getData}
         title={title}
         columnModel={columnModel}
+        editable
       />
     );
   }

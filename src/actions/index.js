@@ -16,23 +16,23 @@ export function getGridData(): Action {
       data: [
         {
           name: 'Test 1',
-          role: 8,
-          percentage: 1
+          role: '8',
+          phoneNumber: '1234567890'
         },
         {
           name: 'Test 2',
-          role: 31,
-          percentage: 1
+          role: '31',
+          phoneNumber: '1234-890'
         },
         {
           name: 'Bene 1',
-          role: 10,
-          percentage: 0.5
+          role: '10',
+          phoneNumber: '1234590'
         },
         {
           name: 'Bene 2',
-          role: 10,
-          percentage: 0.5
+          role: '10',
+          phoneNumber: '1234567890'
         }
       ]
     }

@@ -48,7 +48,7 @@ export default function SemanticReduxFormField({
     'prefix',
     'precision',
     'thousandSeparator',
-    'fluid'
+    'selection'
   ];
   const onlyInputFieldProps = _.pick({ ...input, ...props }, inputFieldProps);
 
@@ -58,6 +58,7 @@ export default function SemanticReduxFormField({
 
   return (
     <Form.Field
+      fluid
       width={props.width}
       name={props.name}
       error={touched && error}
@@ -66,6 +67,7 @@ export default function SemanticReduxFormField({
     >
       <label>{label}</label>
       <As
+        fluid
         value={input.value}
         checked={input.value}
         defaultChecked={input.value}

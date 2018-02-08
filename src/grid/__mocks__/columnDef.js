@@ -1,11 +1,28 @@
 import React from 'react';
+import type { ComponentType } from 'react';
 import { Icon } from 'semantic-ui-react';
 
-const columns = [
+type column = {
+  dataIndex: string,
+  name: string,
+  editor?: ComponentType<*>,
+  order: number,
+  meta?: {
+    required: boolean,
+    label: string,
+    entity: string
+  }
+};
+
+const defaultColumnValue = {
+  editor: undefined,
+  meta: {}
+};
+
+const columns: Array<column> = [
   {
     dataIndex: 'name',
     name: 'Name',
-    type: 'text',
     order: 1,
     sortComparator: (first, second) => {
       if (first < second) {
@@ -17,7 +34,6 @@ const columns = [
   {
     dataIndex: 'govtID',
     name: 'Government ID',
-    type: 'text',
     order: 2,
     sortComparator: 'default', // can be skipped and default should be used
     // renderer should only be called if data is valid else render value as is with error
@@ -35,8 +51,7 @@ const columns = [
   {
     dataIndex: 'homePhone',
     name: 'Home Phone',
-    order: 3,
-    type: 'phone' // should not support custom types in this implementation and assume text
+    order: 3
     // skipping default comparator
     // skipping renderer, same value should be rendered
   },
@@ -44,7 +59,6 @@ const columns = [
     dataIndex: 'workPhone',
     name: 'Work Phone',
     // missing order should be pushed to end
-    type: 'text',
     renderer: value => (
       <div>
         <Icon name="phone" />

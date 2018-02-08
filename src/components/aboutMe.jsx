@@ -17,17 +17,20 @@ type Props = {
   getGridData: Function
 };
 
+const roles = [
+  { name: 'Principal Beneficiary', value: '10' },
+  { name: 'Payor', value: '31' },
+  { name: 'Owner', value: '8' }
+];
+
 const roleFormatter = value => {
-  switch (value) {
-    case 8:
-      return 'Owner';
-    case 31:
-      return 'Payor';
-    case 10:
-      return 'Principal Beneficiary';
-    default:
-      return value;
-  }
+  const returnValue = roles.find(item => item.value === value);
+  return returnValue ? returnValue.name : value;
+};
+
+const roleParser = value => {
+  const returnValue = roles.find(item => item.name === value);
+  return returnValue ? returnValue.value : value;
 };
 
 function AboutMe(props: Props) {
@@ -43,11 +46,12 @@ function AboutMe(props: Props) {
       dataIndex: 'role',
       name: 'Role',
       order: 2,
-      formatter: roleFormatter
+      formatter: roleFormatter,
+      parser: roleParser
     },
     {
-      dataIndex: 'percentage',
-      name: 'Role Percentage',
+      dataIndex: 'phoneNumber',
+      name: 'Phone Number',
       editor: PhoneField
     }
   ];

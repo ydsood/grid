@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import { Table } from 'semantic-ui-react';
+import { Table, Button } from 'semantic-ui-react';
 import type { EditableGrid } from './editableGrid';
 import type { StaticGrid } from './staticGrid';
 import ColumnModel from './columnModel';
@@ -28,9 +28,11 @@ export default (Grid: SupporteSupportedGrid) => {
     }
     buildTableHeaders: Function;
     buildTableHeaders() {
+      console.log(this.props.editable);
       return (
         <Table.Header>
           <Table.Row>
+            {this.props.editable && <Table.HeaderCell />}
             {this.colModel
               .get()
               .map(item => (
