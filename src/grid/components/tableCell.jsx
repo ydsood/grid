@@ -17,10 +17,6 @@ export default function TableCell(props: TableCellProps) {
     editable,
     column: { dataIndex, meta, editor, formatter, parser }
   } = props;
-  const options = [
-    { key: 'key', text: 'Text', value: 'value' },
-    { key: 'key1', text: 'Text1', value: 'value1' }
-  ];
   const RenderField = editor;
   const fieldName = `${name}.${dataIndex}`;
   if (editable) {
@@ -32,8 +28,6 @@ export default function TableCell(props: TableCellProps) {
         name={fieldName}
         format={formatter}
         parse={parser}
-        as={Dropdown}
-        options={options}
         selection
       />
     );

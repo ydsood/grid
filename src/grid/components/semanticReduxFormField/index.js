@@ -58,7 +58,6 @@ export default function SemanticReduxFormField({
 
   return (
     <Form.Field
-      fluid
       width={props.width}
       name={props.name}
       error={touched && error}

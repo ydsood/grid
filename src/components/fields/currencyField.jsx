@@ -2,12 +2,12 @@
 import React from 'react';
 import CurrencyInput from 'react-currency-input';
 import { Field } from 'redux-form';
-import SemanticReduxFormField from './fields/semanticReduxFormField';
+import SemanticReduxFormField from './semanticReduxFormField';
 
 type Props = {
   name: string,
   order: number,
-  props: Object,
+  props: Object
 };
 
 /*

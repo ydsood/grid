@@ -7,6 +7,7 @@ import List from '../list';
 import Grid from '../grid';
 import { getData, getGridData } from '../actions';
 import PhoneField from './fields/phoneField';
+import { phone as phoneFormatter } from './fields/formatters';
 
 const onSubmit = values => alert(JSON.stringify(values));
 type Props = {
@@ -52,11 +53,12 @@ function AboutMe(props: Props) {
     {
       dataIndex: 'phoneNumber',
       name: 'Phone Number',
-      editor: PhoneField
+      editor: PhoneField,
+      formatter: phoneFormatter
     }
   ];
   return (
-    <Form onSubmit={handleSubmit(onSubmit)} className="aboutMe">
+    <Form onSubmit={handleSubmit(onSubmit)} className="sampleForm">
       <p>I am</p>
       <Field
         component={InputField}

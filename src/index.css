@@ -4,7 +4,7 @@ body {
   font-family: sans-serif;
 }
 
-.aboutMe {
+.sampleForm {
   height: 100vh;
   padding: 35vh;
   text-align: center;
@@ -16,7 +16,7 @@ textarea {
   border-bottom: 1px solid grey;
   outline: none;
   text-align: center;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 textarea:focus,

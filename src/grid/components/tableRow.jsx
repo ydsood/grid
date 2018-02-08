@@ -7,17 +7,17 @@ export default class TableRow extends Component<Object> {
     const { input, editable, removeData, index, data, name } = this.props;
     const renderData = input ? input.value : data;
     const cells = this.props.columnModel.get().map(column => {
-      console.log(name);
       const cellNamePrefix = input ? input.name : name;
       const { dataIndex } = column;
       const value = renderData[dataIndex];
+      const key = `${cellNamePrefix}.${column.dataIndex}`;
       return (
-        <Table.Cell key={`${cellNamePrefix}.${column.dataIndex}`}>
+        <Table.Cell key={key}>
           <TableCell
             name={cellNamePrefix}
             column={column}
             value={value}
-            editable
+            editable={editable}
           />
         </Table.Cell>
       );

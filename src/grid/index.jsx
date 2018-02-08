@@ -1,4 +1,5 @@
 import React from 'react';
+import { Popup } from 'semantic-ui-react';
 import StaticGrid from './components/staticGrid';
 import EditableGrid from './components/editableGrid';
 
@@ -8,11 +9,20 @@ type GridProps = {
   getData?: Function,
   editable?: Boolean,
   formProps?: Object | void,
-  columnModel: Array<Object>
+  columnModel: Array<Object>,
+  name: string
 };
 
 function Grid(props: GridProps) {
-  const { editable, data, getData, title, columnModel, ...formProps } = props;
+  const {
+    editable,
+    data,
+    getData,
+    title,
+    columnModel,
+    name,
+    ...formProps
+  } = props;
   if (editable) {
     return (
       <EditableGrid
@@ -31,6 +41,7 @@ function Grid(props: GridProps) {
       getData={getData}
       title={title}
       columnModel={columnModel}
+      name={name}
     />
   );
 }

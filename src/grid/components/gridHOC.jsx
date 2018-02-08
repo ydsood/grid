@@ -28,7 +28,6 @@ export default (Grid: SupporteSupportedGrid) => {
     }
     buildTableHeaders: Function;
     buildTableHeaders() {
-      console.log(this.props.editable);
       return (
         <Table.Header>
           <Table.Row>

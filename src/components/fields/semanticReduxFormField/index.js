@@ -1,5 +1,6 @@
 import React from 'react';
 import type { FormFieldProps } from 'redux-form';
+import CurrencyField from '../currencyField';
 import { Input, Message, Form } from 'semantic-ui-react';
 import _ from 'lodash';
 
@@ -54,7 +55,11 @@ export default function SemanticReduxFormField({
 
   const displayValue = props.hidden ? 'none' : '';
 
-  onlyInputFieldProps.onChange = handleChange;
+  if (As === CurrencyField) {
+    onlyInputFieldProps.onChangeEvent = input.onChange;
+  } else {
+    onlyInputFieldProps.onChange = handleChange;
+  }
 
   return (
     <Form.Field

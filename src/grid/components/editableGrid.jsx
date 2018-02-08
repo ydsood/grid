@@ -1,5 +1,12 @@
 import React, { Component } from 'react';
-import { Table, Segment, Header, Button } from 'semantic-ui-react';
+import {
+  Table,
+  Segment,
+  Header,
+  Button,
+  Message,
+  Icon
+} from 'semantic-ui-react';
 import { Field } from 'redux-form';
 import buildGrid from './gridHOC';
 import TableRow from './tableRow';
@@ -55,28 +62,44 @@ class EditableGrid extends Component<EditableGridProps> {
   }
 
   render() {
+    const { formProps: { meta } } = this.props;
+    const errorState = meta.dirty && meta.invalid;
+    const warningState = meta.dirty && !!meta.warning;
+    const errorMessage = errorState && (
+      <Message error>
+        <Icon name="warning" />
+        {`Error : ${meta.error} `}
+      </Message>
+    );
+    const warningMessage = warningState && (
+      <Message warning>
+        <Icon name="warning" />
+        {`Warning : ${meta.warning} `}
+      </Message>
+    );
     const renderComponent = (
       <Segment>
         <Header as="h4">{`${this.props.title}`}</Header>
         <Table definition>
           {this.props.buildTableHeaders()}
-          <Table.Body>
-            {this.buildFieldItems()}
+          <Table.Body>{this.buildFieldItems()}</Table.Body>
+          <Table.Footer fullWidth>
             <Table.Row>
-              <Table.Cell>
+              <Table.HeaderCell
+                colSpan={this.props.columnModel.get().length + 1}
+              >
                 <Button
                   onClick={this.addData}
                   circular
                   icon="plus"
                   color="green"
                 />
-              </Table.Cell>
-              <Table.Cell />
-              <Table.Cell />
-              <Table.Cell />
+              </Table.HeaderCell>
             </Table.Row>
-          </Table.Body>
+          </Table.Footer>
         </Table>
+        {errorMessage}
+        {warningMessage}
       </Segment>
     );
     return renderComponent;
