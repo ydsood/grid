@@ -50,8 +50,6 @@ const columnDef = [
 ];
 
 const validateGrid = (value = [], allValues) => {
-  console.log(value);
-  console.log(allValues);
   const totalAmount = value.reduce((item, acc) => {
     return item.allocation + acc;
   }, 0);
