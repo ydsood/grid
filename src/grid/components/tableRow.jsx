@@ -25,7 +25,12 @@ export default class TableRow extends Component<Object> {
     if (editable) {
       const removeRowCell = (
         <Table.Cell>
-          <Button icon="remove" circular onClick={e => removeData(e, index)} />
+          <Button
+            type="button"
+            icon="remove"
+            circular
+            onClick={e => removeData(e, index)}
+          />
         </Table.Cell>
       );
       cells.unshift(removeRowCell);
