@@ -78,7 +78,7 @@ class EditableGrid extends Component<EditableGridProps> {
       </Message>
     );
     const renderComponent = (
-      <Segment>
+      <Segment style={{ 'overflow-x': 'auto' }}>
         <Header as="h4">{`${this.props.title}`}</Header>
         <Table definition>
           {this.props.buildTableHeaders()}
