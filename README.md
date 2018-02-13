@@ -1,7 +1,9 @@
 # grid
-This is an implementation for a reusable grid component that takes in a column definition with injectable editor types and renders itself in the parent redux form and when values are added the values are added back to the redux form component that renders it.
+This is an implementation for a reusable grid component that takes in a column definition with injectable editor types and renders itself in the parent redux form. The grid does not maintain any component state and the data added or removed is directly passed back to the parent form.
 
-The implementation relies on (semantic-ui-react)[https://react.semantic-ui.com/introduction] and is meant to comply with (ReduxForm)[https://redux-form.com/7.2.3/].  
+The implementation relies on [semantic-ui-react](https://react.semantic-ui.com/introduction) and is meant to comply with [ReduxForm](https://redux-form.com/7.2.3/).  
+
+![Sample image for editor grid](editor-grid-sample.gif)
 
 ### Usage
 ```javascript
@@ -47,6 +49,7 @@ export default function SampleForm(props: Object){
 <Form onSubmit={props.submitHandler}>
 <FieldArray component={Grid}
 ```
+
 
 #### Static Grid
 
