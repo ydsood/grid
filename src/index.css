@@ -23,3 +23,6 @@ textarea:focus,
 input:focus {
   border-bottom: 3px solid green;
 }
+.grid {
+  overflow-x: auto;
+}

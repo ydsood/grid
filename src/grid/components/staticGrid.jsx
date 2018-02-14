@@ -32,13 +32,13 @@ class StaticGrid extends Component<StaticGridProps> {
   render() {
     const renderComponent = (
       <Segment>
-        <Header as="h4">{`${this.props.title}`}</Header>
-        <Segment style={{ 'overflow-x': 'auto' }} basic>
+        <div className="grid">
+          <Header as="h4">{`${this.props.title}`}</Header>
           <Table>
             {this.props.buildTableHeaders()}
             <Table.Body>{this.buildTableBody()}</Table.Body>
           </Table>
-        </Segment>
+        </div>
       </Segment>
     );
     return renderComponent;

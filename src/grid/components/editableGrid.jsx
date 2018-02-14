@@ -15,7 +15,7 @@ type EditableGridProps = {
   data: Array<string>,
   formProps: Object,
   title: string,
-  columnModel: Array<Object>,
+  columnModel: Object,
   buildTableHeaders: Function
 };
 
@@ -33,11 +33,13 @@ class EditableGrid extends Component<EditableGridProps> {
     }
   }
 
+  addData: Function;
   addData(event) {
     event.preventDefault();
     this.props.formProps.fields.push({});
   }
 
+  removeData: Function;
   removeData(event, index) {
     event.preventDefault();
     const { formProps: { fields } } = this.props;
@@ -78,26 +80,28 @@ class EditableGrid extends Component<EditableGridProps> {
       </Message>
     );
     const renderComponent = (
-      <Segment style={{ 'overflow-x': 'auto' }}>
-        <Header as="h4">{`${this.props.title}`}</Header>
-        <Table definition>
-          {this.props.buildTableHeaders()}
-          <Table.Body>{this.buildFieldItems()}</Table.Body>
-          <Table.Footer fullWidth>
-            <Table.Row>
-              <Table.HeaderCell
-                colSpan={this.props.columnModel.get().length + 1}
-              >
-                <Button
-                  onClick={this.addData}
-                  circular
-                  icon="plus"
-                  color="green"
-                />
-              </Table.HeaderCell>
-            </Table.Row>
-          </Table.Footer>
-        </Table>
+      <Segment>
+        <div className="grid">
+          <Header as="h4">{`${this.props.title}`}</Header>
+          <Table definition>
+            {this.props.buildTableHeaders()}
+            <Table.Body>{this.buildFieldItems()}</Table.Body>
+            <Table.Footer fullWidth>
+              <Table.Row>
+                <Table.HeaderCell
+                  colSpan={this.props.columnModel.get().length + 1}
+                >
+                  <Button
+                    onClick={this.addData}
+                    circular
+                    icon="plus"
+                    color="green"
+                  />
+                </Table.HeaderCell>
+              </Table.Row>
+            </Table.Footer>
+          </Table>
+        </div>
         {errorMessage}
         {warningMessage}
       </Segment>
