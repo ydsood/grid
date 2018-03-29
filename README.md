@@ -46,8 +46,6 @@ export default function SampleForm(props: Object){
     <Form>
   )
 }
-<Form onSubmit={props.submitHandler}>
-<FieldArray component={Grid}
 ```
 
 
